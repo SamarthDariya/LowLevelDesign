@@ -1,0 +1,5 @@
+Liskov Substitution principal:
+    anywhere you are using the parent class you can be able to substitute the child class without the code actually breaking.
+
+Open:
+    a class should be open for extension closed for modification
