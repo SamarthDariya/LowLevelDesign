@@ -38,6 +38,9 @@ class Pizza {
     description(){
         throw Error("Not implemented");
     }
+    give_breakdown(){
+        throw Error("Not implemented");
+    }
 }
 
 class MargheritaPizza extends Pizza {
@@ -47,6 +50,9 @@ class MargheritaPizza extends Pizza {
     description(){
         return "Margherita";
     }
+    give_breakdown(){
+        return {"Margherita":200};
+    }
 }
 
 class FarmhousePizza extends Pizza {
@@ -55,6 +61,9 @@ class FarmhousePizza extends Pizza {
     }
     description(){
         return "Farmhouse";
+    }
+    give_breakdown(){
+        return {"Farmhouse":300};
     }
 }
 
@@ -70,10 +79,16 @@ class Addons extends Pizza {
     get_base_description(){
         return this.#base.description();
     }
+    get_base_breakdown(){
+        return this.#base.give_breakdown();
+    }
     cost(){
         throw Error("Not implemented");
     }
     description(){
+        throw Error("Not implemented");
+    }
+    give_breakdown(){
         throw Error("Not implemented");
     }
 }
@@ -86,6 +101,14 @@ class ExtraCheese extends Addons {
 
     description(){
         return this.get_base_description() + ", extra cheese"
+    }
+    give_breakdown(){
+        let _breakdown = {...this.get_base_breakdown()};
+        if(!_breakdown.extracheese){
+            _breakdown.extracheese = 0;
+        }
+        _breakdown.extracheese+=50;
+        return _breakdown;
     }
 
 }
@@ -100,6 +123,15 @@ class Olives extends Addons {
         return this.get_base_description() + ", olives"
     }
 
+    give_breakdown(){
+        let _breakdown = {...this.get_base_breakdown()};
+        if(!_breakdown.olives){
+            _breakdown.olives = 0;
+        }
+        _breakdown.olives+=30;
+        return _breakdown;
+    }
+
 }
 
 class Paneer extends Addons {
@@ -110,6 +142,15 @@ class Paneer extends Addons {
     description(){
         return this.get_base_description() + ", paneer"
     }
+
+    give_breakdown(){
+        let _breakdown = {...this.get_base_breakdown()};
+        if(!_breakdown.paneer){
+            _breakdown.paneer = 0;
+        }
+        _breakdown.paneer+=70;
+        return _breakdown;
+    }
 }
 
 
@@ -117,9 +158,17 @@ function printReceipt(pizza){
     return `${pizza.description()} => ${pizza.cost()}`;
 }
 
+function print_breakdown(pizza){
+    return pizza.give_breakdown();
+}
+
 // -------------------------client--------------------------
 
 const first_pizza = new ExtraCheese(new Olives(new MargheritaPizza()));
 console.log(printReceipt(first_pizza));
+console.log(print_breakdown(first_pizza));
 const second_pizza = new Paneer(new Paneer(new FarmhousePizza()));
 console.log(printReceipt(second_pizza));
+console.log(print_breakdown(second_pizza));
+console.log(printReceipt(new MargheritaPizza()));
+console.log(print_breakdown(new MargheritaPizza()));
