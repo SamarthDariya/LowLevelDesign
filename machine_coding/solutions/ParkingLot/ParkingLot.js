@@ -54,10 +54,15 @@ class ParkingLot {
                 return parking_session;
             }
         }
+        console.log(`no free spot for ${vehicle} — lot full for ${type}`);
         return null;
     }
 
     free_spot(parking_session){
+        if(!parking_session){
+            console.log("invalid session — nothing to free");
+            return;
+        }
         parking_session.level.free_spot(parking_session.spot);
         console.log(`${parking_session} finished`)
     }

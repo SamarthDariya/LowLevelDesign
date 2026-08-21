@@ -15,7 +15,7 @@ Solutions go in `solutions/<problem-name>/`.
 
 | # | Problem | New skill it introduces | Patterns in play | Status |
 |---|---------|-------------------------|------------------|--------|
-| 1 | **parking-lot** | Entity modeling from a prompt; the "nouns→classes, verbs→methods" reflex | Factory, Strategy (fee), Singleton | ☐ |
+| 1 | **parking-lot** | Entity modeling from a prompt; the "nouns→classes, verbs→methods" reflex | Factory, Strategy (fee), Singleton | ✅ |
 | 2 | **vending-machine** | A clean, isolated **State machine** (the pattern in its purest form) | State | ☐ |
 | 3 | **atm** | State machine + delegating a sub-task down a chain | State, Chain of Responsibility (cash) | ☐ |
 | 4 | **tic-tac-toe** | Modeling a **game**: board, players, turn loop, win-detection | Strategy (win-check), State (turn) | ☐ |
@@ -50,3 +50,4 @@ Pick from these to reinforce a specific muscle. Most reuse skills from the core 
 _(update as we go)_
 
 - 2026-08-21 — Plan created. Patterns (all 16, Tier 1 + Tier 2) completed. Starting core path next.
+- 2026-08-21 — #1 parking-lot DONE. Clean modular design: Ticket/ParkingSession owns vehicle↔spot link (no bidirectional refs), Level keeps O(1) free-count map per type, Singleton lot, Spot parameterized by type, Entry/Exit gates. Fixed: made the lot-full failure path visible + guarded exit against null session. Open polish (not blocking): redundant has_free_spot+assign_spot double-check, no spot ids, O(n) scan to locate the free spot.

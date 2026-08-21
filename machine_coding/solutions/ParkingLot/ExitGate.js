@@ -5,6 +5,10 @@ class ExitGate {
     }
 
     exit(parking_session){
+        if(!parking_session){
+            console.log("no valid session presented at exit");
+            return;
+        }
         this.parking_lot.free_spot(parking_session);
     }
 }
